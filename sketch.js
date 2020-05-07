@@ -1,16 +1,26 @@
 var webcam;
 var tracker;//
 //let features = null; // list of facial features
-let w = 640;
-let h = 480;
+var w = 640;
+var h = 480;
 let mouth = [44, 61, 60, 59, 50, 58, 57, 56] // points of outside of mouth taken from reference
 ////www.auduno.com/clmtrackr/docs/reference.html
 function setup(){
-    createCanvas(w,h);
-    background(200);
-    webcam = createCapture(VIDEO);
-    webcam.size = (w,h);
+    webcam = createCapture({
+        audio: false,
+        video: {
+            width: w,
+            height: h
+        }
+    }, function() {
+        console.log('webcam ready.')
+    });
+    webcam.elt.setAttribute('playsinline', '');
+    createCanvas(w, h);
+    webcam.size(w, h);
     webcam.hide();
+
+    colorMode(HSB);
 
     //connect facetracking to web cam
     tracker = new clm.tracker();
@@ -20,36 +30,22 @@ function setup(){
 }
 
 function draw(){
+    background(200);
     translate(width,0)// reflect video
     scale(-1,1);
-    image(webcam,0,0,w,h);
-    var features = tracker.getCurrentPosition();
+    //image(webcam,0,0,w,h);
+    var positions = tracker.getCurrentPosition();
 
-    //https://editor.p5js.org/kylemcdonald/sketches/BJOcyD9hm 
     noFill();
-    stroke(255);
-
-    beginShape();
-    for (var i = 0; i < features.length; i++) {
-        vertex(features[i][0], features[i][1]);
+    
+    strokeWeight(5)
+   
+    for (var i = 0; i < positions.length; i++) {
+        stroke(151)
+        line(positions[i][0]-50, positions[i][1],positions[i][0]-10, positions[i][1]-75);
+        stroke(0)
+        line(positions[i][0]+50, positions[i][1],positions[i][0]+10, positions[i][1]-75);
     }
-    endShape();
 
-
-    // if(features.length > 0){
-    //     let leftEye = features[27];
-    //     let leftEyeX = leftEye[0];
-    //     let leftEyeY = leftEye[1];
-
-    //     let rightEye = features[32];
-    //     let rightEyeX = rightEye[0];
-    //     let rightEyeY = rightEye[1];
-    //     console.log('detected');
-
-    //     noFill();
-    //     stroke(255)
-    //     ellipse(leftEyeX,leftEyeY,25,25);
-    //     ellipse(rightEyeX,rightEyeY,25,25);
-    // }
 
 }
