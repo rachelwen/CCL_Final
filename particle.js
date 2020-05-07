@@ -19,8 +19,8 @@ class Particle{
     show(){ 
         //mess with visual appearance here
         
-        stroke(255,255,255,this.alpha);
-        strokeWeight(5);
+        stroke(random(360),random(40,80),100,this.alpha);
+        strokeWeight(random(10));
         point(this.pos.x,this.pos.y);
     }
 

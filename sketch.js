@@ -21,7 +21,8 @@ function setup(){
     createCanvas(w, h);
     webcam.size(w, h);
     webcam.hide();
-
+    
+    colorMode(HSB);
    
 
     //connect facetracking to web cam
@@ -41,20 +42,20 @@ function draw(){
     noFill();
     if(random(1)>0.1){
     for (let i = positions.length-1; i > 0; i--) {
-        stroke(255)
-        strokeWeight(5)
+    
         //point(positions[i][0],positions[i][1])
       //  let dot = positions[i];
       
        let particle = new Particle(positions[i][0],positions[i][1]);
         particles.push(particle);
+        
     }
 }
     for(let j = particles.length-1; j > 0; j-- ){
         particles[j].behaviors();
         particles[j].show();
         particles[j].update();
-
+        
         if(particles[j].toDelete()){
             // remove this particle
             particles.splice(j,1); // from coding train simple particle system tutorial
