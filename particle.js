@@ -5,12 +5,12 @@ class Particle{
     this.vel = p5.Vector.random2D();
     this.acc = createVector();
     this.maxSpeed = 5;
-    this.maxForce = 0.3; //controls how well the particle can return to its position
+    this.maxForce = 0.1; //controls how well the particle can return to its position
     this.alpha = 255;
     }
 
     update(){
-        this.alpha -= 20; // fades out particles
+        this.alpha -= 25; // fades out particles
         this.pos.add(this.vel);
         this.vel.add(this.acc);
         this.acc.mult(0); //acc accumulates forces, every frame needs to start from zero
@@ -31,7 +31,14 @@ class Particle{
     behaviors(){ //function that makes particles go back to where they belong
         // let seek = this.seek(this.target);
         let arrive = this.arrive(this.target);
-        this.applyForce(arrive); // 
+        let mouse = createVector(mouseX, mouseY);
+        let flee = this.flee(mouse);
+
+        arrive.mult(1);
+        flee.mult(5);
+
+        this.applyForce(arrive); 
+        this.applyForce(flee);
 
     }
 
@@ -39,14 +46,21 @@ class Particle{
         this.acc.add(f); //many forces at use, this adds them to the acceleration
     }
 
-    seek(){
+    flee(){ //modified seek function to react to mouse
         //need to find vector from obj location to the place its seeking
         let desired = p5.Vector.sub(this.target,this.pos); //subtract to find vector that points from position to target
-        desired.setMag(this.maxSpeed);
-        //steering = desired - velocity:
-        let steer = p5.Vector.sub(desired,this.vel);
-        steer.limit(this.maxForce);
-        return steer;
+        let d = desired.mag();
+        if (d < 5){ // particles only react to mouse when this close
+             desired.setMag(this.maxSpeed);
+            
+             desired.mult(-1); // changes vector to go in opposite direction
+             //steering = desired - velocity:
+             let steer = p5.Vector.sub(desired,this.vel);
+             steer.limit(this.maxForce);
+             return steer;
+        }else{
+            return createVector(0,0);
+        }
     }
 
     arrive(){ // same as seek() but differt desired magnitude
