@@ -1,5 +1,7 @@
 var webcam;
 var tracker;//
+
+let particles = [];
 //let features = null; // list of facial features
 var w = 640;
 var h = 480;
@@ -20,7 +22,7 @@ function setup(){
     webcam.size(w, h);
     webcam.hide();
 
-    colorMode(HSB);
+   
 
     //connect facetracking to web cam
     tracker = new clm.tracker();
@@ -30,22 +32,30 @@ function setup(){
 }
 
 function draw(){
-    background(200);
+    background(0);
     translate(width,0)// reflect video
     scale(-1,1);
-    //image(webcam,0,0,w,h);
+   // image(webcam,0,0,w,h);
     var positions = tracker.getCurrentPosition();
 
     noFill();
-    
-    strokeWeight(5)
-   
-    for (var i = 0; i < positions.length; i++) {
-        stroke(151)
-        line(positions[i][0]-50, positions[i][1],positions[i][0]-10, positions[i][1]-75);
-        stroke(0)
-        line(positions[i][0]+50, positions[i][1],positions[i][0]+10, positions[i][1]-75);
+    if(random(1)>0.1){
+    for (let i = positions.length-1; i > 0; i--) {
+        stroke(255)
+        strokeWeight(5)
+        //point(positions[i][0],positions[i][1])
+      //  let dot = positions[i];
+      
+       let particle = new Particle(positions[i][0],positions[i][1]);
+        particles.push(particle);
     }
+}
+    for(let j = particles.length-1; j > 0; j-- ){
+        particles[j].behaviors();
+        particles[j].show();
+        particles[j].update();
+    }
+   
 
 
 }
