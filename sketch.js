@@ -54,6 +54,12 @@ function draw(){
         particles[j].behaviors();
         particles[j].show();
         particles[j].update();
+
+        if(particles[j].toDelete()){
+            // remove this particle
+            particles.splice(j,1); // from coding train simple particle system tutorial
+            
+        }
     }
    
 

@@ -6,9 +6,11 @@ class Particle{
     this.acc = createVector();
     this.maxSpeed = 5;
     this.maxForce = 0.3; //controls how well the particle can return to its position
+    this.alpha = 255;
     }
 
     update(){
+        this.alpha -= 20; // fades out particles
         this.pos.add(this.vel);
         this.vel.add(this.acc);
         this.acc.mult(0); //acc accumulates forces, every frame needs to start from zero
@@ -16,9 +18,14 @@ class Particle{
 
     show(){ 
         //mess with visual appearance here
-        stroke(255);
+        
+        stroke(255,255,255,this.alpha);
         strokeWeight(5);
         point(this.pos.x,this.pos.y);
+    }
+
+    toDelete(){ //this looks to see if the alpha is less than zero
+        return this.alpha < 0; 
     }
 
     behaviors(){ //function that makes particles go back to where they belong
