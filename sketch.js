@@ -7,7 +7,7 @@ var w = 640;
 var h = 480;
 let mouth = [44, 61, 60, 59, 50, 58, 57, 56] // points of outside of mouth taken from reference
 ////www.auduno.com/clmtrackr/docs/reference.html
-let prevPos;
+let prevPos = [];
 function setup(){
     webcam = createCapture({
         audio: false,
@@ -39,10 +39,11 @@ function draw(){
     background(0);
     translate(width,0)// reflect video
     scale(-1,1);
-   // image(webcam,0,0,w,h);
+   //image(webcam,0,0,w,h);
 
-   var positions = tracker.getCurrentPosition();
-    // if(frameCount%2 == 0){
+         var positions = tracker.getCurrentPosition();
+    
+    // if(frameCount%50 == 0){
     // var positions = tracker.getCurrentPosition();
     // prevPos = positions;
     // }else{
@@ -50,7 +51,7 @@ function draw(){
     // }
 
     noFill();
-    if(random(1)<0.1){ // makes face 'flashy'
+    //if(random(1)<0.1){ // makes face 'flashy'
     for (let i = positions.length-1; i > 0; i--) {
         //point(positions[i][0],positions[i][1])
       //  let dot = positions[i];
@@ -59,15 +60,18 @@ function draw(){
         particles.push(particle);
         
      }
-    }
+   // }
     for(let j = particles.length-1; j > 0; j-- ){
         particles[j].behaviors();
         particles[j].show();
         particles[j].update();
         
-        if(particles[j].toDelete()){
-            // remove this particle
-            particles.splice(j,300); // from coding train simple particle system tutorial
+        // if(particles[j].toDelete()){
+        //     // remove this particle
+        //     particles.splice(j,1); // from coding train simple particle system tutorial
+        // }
+        if(particles.length > 71){
+            particles.splice(j,1);
         }
         
     }

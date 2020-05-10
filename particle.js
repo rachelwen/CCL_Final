@@ -2,15 +2,16 @@ class Particle{
     constructor(x,y){
     this.pos = createVector(x,y);
     this.target = createVector(x,y);
+   // this.target = this.pos;
     this.vel = p5.Vector.random2D();
     this.acc = createVector();
     this.maxSpeed = 5;
-    this.maxForce = 0.1; //controls how well the particle can return to its position
+    this.maxForce = 2; //controls how well the particle can return to its position
     this.alpha = 255;
     }
 
     update(){
-        this.alpha -= 20; // fades out particles
+      // this.alpha -= 205; // fades out particles
         this.pos.add(this.vel);
         this.vel.add(this.acc);
         this.acc.mult(0); //acc accumulates forces, every frame needs to start from zero
@@ -46,7 +47,7 @@ class Particle{
  
 
     arrive(target){ // same as seek() but differt desired magnitude
-        let desired = p5.Vector.sub(this.target,this.pos); //subtract to find vector that points from position to target
+        let desired = p5.Vector.sub(target,this.pos); //subtract to find vector that points from position to target
         let d = desired.mag();
         let speed = this.maxSpeed;
         if (d < 100){
@@ -63,8 +64,8 @@ class Particle{
         //need to find vector from obj location to the place its seeking
         let desired = p5.Vector.sub(target,this.pos); //subtract to find vector that points from position to target
         let d = desired.mag();
-        console.log('desired mag',d); 
-        if (d < 50){ // particles only react to mouse when this close
+        console.log(d)
+        if (d < 100){ // particles only react to mouse when this close
             desired.mult(-1);
             desired.setMag(this.maxSpeed);
             
