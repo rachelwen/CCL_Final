@@ -36,7 +36,7 @@ function setup(){
 }
 
 function draw(){
-    background(0);
+    background(203, 56, 35);
     translate(width,0)// reflect video
     scale(-1,1);
    //image(webcam,0,0,w,h);
@@ -57,11 +57,12 @@ function draw(){
       //  let dot = positions[i];
       
        let particle = new Particle(positions[i][0],positions[i][1]);
-        particles.push(particle);
+        particles.push(particle); 
         
      }
    // }
     for(let j = particles.length-1; j > 0; j-- ){
+        
         particles[j].behaviors();
         particles[j].show();
         particles[j].update();
@@ -70,7 +71,7 @@ function draw(){
         //     // remove this particle
         //     particles.splice(j,1); // from coding train simple particle system tutorial
         // }
-        if(particles.length > 71){
+        if(particles.length > 71){ // if >0, stationary face will be hidden
             particles.splice(j,1);
         }
         
