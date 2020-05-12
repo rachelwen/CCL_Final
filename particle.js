@@ -1,10 +1,11 @@
 class Particle {
     constructor(x, y) {
-       // this.pos = createVector(x, y);
-        this.pos = p5.Vector.random2D(); //particles fly in -> form stationary face
+        this.pos = createVector(x, y);
+        //this.pos = p5.Vector.random2D(); //particles fly in -> form stationary face
         this.prevPos = this.pos.copy();
-        this.target = createVector(x, y);
+        this.target = createVector(x, y); // =p5.Vector.random2D(); particles sucked out to top right of screen
         // this.target = this.pos;
+       // this.target = this.prevPos;
         this.vel = p5.Vector.random2D();
         this.acc = createVector();
 
@@ -25,18 +26,20 @@ class Particle {
         stroke(random(35), random(40, 80), 80);
         strokeWeight(random(4, 8));
         line(this.pos.x, this.pos.y,this.prevPos.x,this.prevPos.y);
-        this.updatePrev();
+       // this.updatePrev(); 
     }
 
     toDelete() { //this looks to see if the alpha is less than zero
         return this.alpha < 0;
     }
 
+  
     
 
     updatePrev(){
         this.prevPos.x = this.pos.x;
         this.prevPos.y = this.pos.y;
+        
     }
 
     behaviors() { //function that makes particles go back to where they belong
@@ -77,7 +80,7 @@ class Particle {
         let desired = p5.Vector.sub(target, this.pos); //subtract to find vector that points from position to target
         let d = desired.mag();
         console.log(d)
-        if (d < 50) { // particles only react to mouse when this close
+        if (d < 400) { // particles only react to mouse when this close
             desired.mult(-1);
             desired.setMag(this.maxSpeed);
             console.log('mouse on face');

@@ -42,7 +42,9 @@ function draw(){
    //image(webcam,0,0,w,h);
 
          var positions = tracker.getCurrentPosition();
-    
+    // if(frameCount % 100 == 0){
+    //     tracker.reset();
+    // }
     // if(frameCount%50 == 0){
     // var positions = tracker.getCurrentPosition();
     // prevPos = positions;
@@ -52,20 +54,21 @@ function draw(){
 
     noFill();
     //if(random(1)<0.1){ // makes face 'flashy'
-    for (let i = positions.length-1; i > 0; i--) {
+    for (let i = 0; i < positions.length; i++) {
         //point(positions[i][0],positions[i][1])
       //  let dot = positions[i];
       
        let particle = new Particle(positions[i][0],positions[i][1]);
-        particles.push(particle); 
+        particles.push(particle); //adds particle to particle array
         
      }
    // }
-    for(let j = particles.length-1; j > 0; j-- ){
+    for(let j = 0; j < particles.length; j++ ){ // two faces show up bc for loops starts at end
         
         particles[j].behaviors();
         particles[j].show();
         particles[j].update();
+       
         
         // if(particles[j].toDelete()){
         //     // remove this particle
