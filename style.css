@@ -1,4 +1,18 @@
 
 body{
     background-color:rgb(166,23,23)
+   
 }
+
+.sideDish1{
+    position:relative;
+    left:5%;
+    top:50%;
+}
+
+.sideDish2{
+    position:relative;
+    left:75%;
+    top:20%;
+}
+

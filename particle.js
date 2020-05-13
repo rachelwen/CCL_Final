@@ -1,6 +1,6 @@
 class Particle {
     constructor(x, y) {
-       // this.pos = createVector(x, y);
+        //this.pos = createVector(x, y);
         this.pos = p5.Vector.random2D(); //particles fly in -> form stationary face
         this.prevPos = this.pos.copy();
         this.target = createVector(x, y); // =p5.Vector.random2D(); particles sucked out to top right of screen
