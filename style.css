@@ -1,17 +1,64 @@
 
 body{
-    background-color:rgb(166,23,23)
-   
+    background-color:rgb(166,23,23);
+   text-align: center;
+   padding: 0%;
+   margin: 0px;
 }
-/* .mainDish{
-    position:relative;
-    left:15%;
-    top:20%;
+
+.title{
+    position:absolute;
+    left:37%;
+    top:5%;
     width: 400px;
     height: 400px;
-} */
+    color: white;
+    font-family: 'Rock Salt', cursive;
+}
 
+#link{
+    color: white;
+    font-family: 'Rock Salt', cursive;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    
+}
 
+#link2{
+    color: white;
+    font-family: 'Rock Salt', cursive;
+    position: absolute;
+    
+    text-decoration: underline;
+}
+
+.aboutPage{
+    position:absolute;
+    left:42%;
+    top:25%;
+    width: 400px;
+    color: white;
+    font-family: 'Rock Salt', cursive;
+    text-align: center;
+    padding: 0;
+    margin-right: 0px;
+}
+#menu{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width:200px;
+    
+    
+}
+
+#menuYOU{
+    width:300px;
+    margin: 0;
+    
+    text-align: center;
+}
 
 .sideDish1{
     position:absolute;

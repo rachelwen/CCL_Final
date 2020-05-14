@@ -130,7 +130,7 @@ function draw() {
         // }
 
     }
-    fr.html(floor(frameRate()));
+   // fr.html(floor(frameRate()));
 
 }
 
