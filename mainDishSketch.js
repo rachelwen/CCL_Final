@@ -31,7 +31,7 @@ function setup() {
     let x = (windowWidth - width) / 2;
     let y = (windowHeight - height) / 2;
     cnv.position(x, y);
-    cnv.style('z-index','-1');
+    // cnv.style('z-index','-1');
     webcam.size(w, h);
     webcam.hide();
 
@@ -66,7 +66,9 @@ function draw() {
     //image(backgroundImage,0,0,w,h);
 
     bowl();
-    chopsticks(mouseX, mouseY)
+    if(mouseX > 0 && mouseX < w && mouseY >0 && mouseY < h){
+        chopsticks(mouseX, mouseY);
+      }
 
 
     // translate(width,0)// reflect video
@@ -84,10 +86,10 @@ function draw() {
     //     positions = prevPos;
     // }
 
-    noFill();
+   // noFill();
     //if(random(1)<0.1){ // makes face 'flashy'
 
-    for (let i = 0; i < positions.length; i++) {
+    for (let i = positions.length-1; i > 0; i--) {
 
 
         let particle = new Particle(positions[i][0], positions[i][1]);
@@ -102,7 +104,7 @@ function draw() {
 
 
     // }
-    for (let j = particles.length - 1; j > 0; j--) { // two faces show up bc for loops starts at end
+    for (let j =0; j <  particles.length; j++) { // two faces show up bc for loops starts at end
 
 
         particles[j].behaviors();
@@ -128,15 +130,13 @@ function draw() {
         // }
 
     }
-    //fr.html(floor(frameRate()));
+    fr.html(floor(frameRate()));
 
 }
 
 function chopsticks(x, y) {
     strokeWeight(5)
     stroke(0, 51, 35)
-    // line(x + 45, y - 10, x - 30, y + 20 - random(5))
-    // line(x + 50, y, x - 25, y + 20 + random(5))
     line(x + 65, y - 30, x - 50, y + 40 - random(5))
     line(x + 70, y, x - 45, y + 40 + random(5))
 

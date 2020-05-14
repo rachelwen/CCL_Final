@@ -1,7 +1,7 @@
 class Particle {
     constructor(x, y) {
-        //this.pos = createVector(x, y);
-        this.pos = p5.Vector.random2D(); //particles fly in -> form stationary face
+       this.pos = createVector(x, y);
+    //this.pos = p5.Vector.random2D(); //particles fly in -> form stationary face
         this.prevPos = this.pos.copy();
         this.target = createVector(x, y); // =p5.Vector.random2D(); particles sucked out to top right of screen
          //this.target = p5.Vector.random2D();
@@ -19,7 +19,8 @@ class Particle {
         }
        
         
-        
+        this.randX = rand(-5,5)
+        this.randY = rand(-5,5)
     }
 
     update() {
@@ -35,18 +36,20 @@ class Particle {
         this.satVal = floor(random(40,80));
         
         
-        stroke(random(35),random(40,80), 50);
+       stroke(117,56,26,this.alpha);
        
     
        // strokeWeight(random(4,8));
-       strokeWeight(1)
-       // line(this.pos.x, this.pos.y,this.prevPos.x,this.prevPos.y);
+       strokeWeight(5)
+        //line(this.pos.x, this.pos.y,this.prevPos.x,this.prevPos.y);
+         line(this.pos.x, this.pos.y, this.prevPos.x-7,this.prevPos.y);
+       // line(this.pos.x,this.pos.y,this.pos.x+this.randX,this.pos.y+this.randY)
        this.updatePrev(); 
-       noFill()
-       //ellipse(this.pos.x,this.pos.y,5,5)
+       
+       //rect(this.pos.x,this.pos.y,7,5)
       
       // text(alphabet[randomLetter],this.pos.x,this.pos.y,20,20)
-      text(this.randomCharacter,this.pos.x,this.pos.y,20,20)
+      //text(this.randomCharacter,this.pos.x,this.pos.y,20,20)
        
        
         
